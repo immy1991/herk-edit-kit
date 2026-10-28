@@ -1,5 +1,20 @@
 # Herk Edit Kit
 
+> **This is a fork of [nateherkai/herk-edit-kit](https://github.com/nateherkai/herk-edit-kit)** (MIT, © Nate Herk).
+> It adds three things and changes nothing else in Nate's method:
+>
+> - **Brand profiles.** `npm run new-video -- <slug> --brand <brand-slug>` applies a brand's
+>   colours, fonts, caption style, sound and voice rules to a project. Copy `brands/_template/`
+>   to `brands/<brand-slug>/` and fill it in. Your profiles stay out of git.
+> - **fal.ai generation.** `motion-showreel` generates through fal.ai by default, or Kie.ai with
+>   `--provider kie`. See the [tools guide](docs/TOOLS-AND-API-KEYS.md).
+> - **The `herk-edit` skill** in [`skill/herk-edit/`](skill/herk-edit/). It runs a full edit of one
+>   clip in your brand from any folder. Install it with
+>   `cp -R skill/herk-edit ~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex), then
+>   follow [`skill/herk-edit/references/setup.md`](skill/herk-edit/references/setup.md).
+>
+> To use this fork, clone `https://github.com/immy1991/herk-edit-kit.git` in the install steps below.
+
 Nate Herk's video-editing kit for **Codex and Claude Code**, built on HyperFrames.
 Formerly the HyperFrames Student Kit.
 Bring your own footage. Cut dead air, review mistakes, plan the story, and build

@@ -1,0 +1,16 @@
+/* Fill from DESIGN.md. Copied into each project as assets/brand-tokens.css. */
+:root {
+  --brand-bg: #0b0b0c;
+  --brand-surface: #161618;
+  --brand-border: #2a2a2e;
+  --brand-accent: #ffffff;
+  --brand-text: #ffffff;
+  --brand-text-dim: #9a9aa3;
+  --font-display: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --dur-in: 0.4s;
+  --dur-out: 0.3s;
+  --radius: 14px;
+}

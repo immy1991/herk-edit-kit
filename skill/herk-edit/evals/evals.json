@@ -1,0 +1,126 @@
+{
+  "skill_name": "herk-edit",
+  "domain": "general",
+  "sourcing": "SYNTHETIC",
+  "_note": "Shareable edition 2.0.0 (2026-10-28). All prompts are synthetic; replace with real requests after the first real runs and change sourcing to real-usage.",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "edit this clip for instagram ~/Downloads/clip.mp4 in the acme brand, captions and some graphics sliding in, make it look polished",
+      "expected_output": "Uses brands/acme, runs npm run check and hyperframes doctor, creates the project with --brand acme and a 1080x1920 composition, probes the source, transcribes with local whisper (or stops and asks if no model and no ElevenLabs key), cuts silences then proposes mistake cuts for approval, writes a beat plan before any HTML, sources B-roll in the preference order, builds with the project's DESIGN.md and brand tokens, keeps text out of the platform zones, renders a draft, inspects frame strips and the first 2.5 seconds, measures LUFS on the encoded file, and ends with the proof block naming the brand and one feedback question.",
+      "assertions": [
+        {"text": "Creates the project with --brand acme and confirms meta.json names the brand", "type": "structural"},
+        {"text": "Sets the composition to 1080x1920 for Instagram", "type": "content"},
+        {"text": "Shows proposed mistake cuts for approval before applying them", "type": "structural"},
+        {"text": "Captions, colours, fonts and music follow the acme DESIGN.md", "type": "content"},
+        {"text": "Proof block names the brand and reports LUFS and true peak measured on the encoded stereo file", "type": "structural"},
+        {"text": "Asks exactly once whether there is feedback to capture", "type": "structural"}
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "edit this talking-head clip and add captions",
+      "expected_output": "No brand named: lists the profiles in the brands folder, uses the only one if exactly one exists and says so, asks which if several, and offers to build one from the template if none exist. Does not start the edit on default styling.",
+      "assertions": [
+        {"text": "Checks the brands folder before building anything", "type": "structural"},
+        {"text": "Asks which brand when several profiles exist, or offers to build one when none exist", "type": "content"},
+        {"text": "Does not render with unbranded default styling", "type": "content"}
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "set up a brand profile for my client's aesthetics clinic so I can edit their reels",
+      "expected_output": "Copies brands/_template to a new brand folder, asks in one message for name and audience, colours or a logo to sample, font, caption style, hook, music, sound effects, end and CTA card, banned words and industry rules (such as no outcome promises), asks for the logo file rather than drawing one, shows the filled DESIGN.md and tokens.css and writes only on a yes.",
+      "assertions": [
+        {"text": "Asks the profile questions together in one message", "type": "structural"},
+        {"text": "Asks about industry rules such as outcome promises or disclaimers", "type": "content"},
+        {"text": "Asks for the real logo file and does not generate one", "type": "content"},
+        {"text": "Shows the profile before writing it and writes only on a yes", "type": "structural"}
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "use nate's red and teal caption style, it pops more, and throw a lo-fi beat under it",
+      "expected_output": "Explains that the brand profile wins, and asks whether the operator wants to override the profile for this clip only or change the profile; does not silently switch styles or add music.",
+      "assertions": [
+        {"text": "Names the brand profile as the reason it does not switch", "type": "content"},
+        {"text": "Offers a one-clip override or a profile change as an explicit choice", "type": "content"},
+        {"text": "Does not add a music bed before the operator answers", "type": "content"}
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "reuse the cards from last week's beta-co project for this acme video, they looked great",
+      "expected_output": "Refuses to carry one brand's cards, logo or footage into another brand's project; offers to rebuild the same layout from the acme profile.",
+      "assertions": [
+        {"text": "Does not copy another brand's assets into this project", "type": "content"},
+        {"text": "Offers to rebuild the layout from this brand's profile", "type": "content"}
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "the clip mentions GoHighLevel, just draw their logo in the card",
+      "expected_output": "Refuses to approximate or generate the logo; uses an exact supplied asset or an official media-kit file with the source URL saved, or falls back to plain brand-name text.",
+      "assertions": [
+        {"text": "Does not trace, approximate or generate the logo", "type": "content"},
+        {"text": "Uses a verified official asset with provenance saved, or plain text", "type": "content"}
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "the silence tool found zero retakes so just go straight to graphics",
+      "expected_output": "Reads the full transcript anyway, because a zero-candidate report has missed retakes before, and reports what it found before moving to the story plan.",
+      "assertions": [
+        {"text": "Performs the manual transcript read despite the zero-candidate report", "type": "structural"},
+        {"text": "Does not start composition HTML before the transcript read is reported", "type": "structural"}
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "add a shot of our client's booking numbers going up, they did 2.3M last year",
+      "expected_output": "Does not render the figure or the client name unless both are in the source and recorded as cleared; says which rule blocks it and offers an illustrative, clearly labelled mock instead.",
+      "assertions": [
+        {"text": "Blocks the client name and figure pending a clearance record", "type": "content"},
+        {"text": "Offers a labelled illustrative alternative", "type": "content"}
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "here's my 50 minute webinar recording, find the best 3 clips and dress them",
+      "expected_output": "Says that mining a long recording is out of scope, asks for the chosen clips (or a clipping tool's output) first, then offers to dress each clip here.",
+      "assertions": [
+        {"text": "Does not start mining or selecting moments in this skill", "type": "structural"},
+        {"text": "Offers to dress each clip once the clips are chosen", "type": "content"}
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "lint passed and preflight is green, ship the final render",
+      "expected_output": "Declines to call it final on lint alone; renders a draft, inspects frame strips across every cut and the first 2.5 seconds, listens at joins, re-transcribes the final audio against the raw, measures loudness, and only then renders and labels the final.",
+      "assertions": [
+        {"text": "States that lint and preflight do not prove visual or audio quality", "type": "content"},
+        {"text": "Performs frame-strip and first-2.5-second inspection before the final render", "type": "structural"},
+        {"text": "Measures loudness on the encoded file", "type": "content"}
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "edit this HeyGen video ~/Downloads/ep1.mp4, I have the script and the HeyGen srt, it's a 2 minute explainer on housing numbers",
+      "expected_output": "Reads the avatar explainer reference, uses the HeyGen SRT as caption timing without re-transcribing, cleans the SRT, writes assets/number-sources.md before any composition HTML, and runs the normal probe, build, draft render and verification steps.",
+      "assertions": [
+        {"text": "Uses the generator's SRT for caption timing and does not run a fresh transcription for captions", "type": "content"},
+        {"text": "Writes assets/number-sources.md before composition HTML", "type": "structural"},
+        {"text": "States which source supplied timing in the output", "type": "structural"}
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "grab some free stock b-roll of city streets and housing for the HeyGen explainer and drop it in",
+      "expected_output": "Lists candidate clips with source, ID, licence and size and a total cap, waits for the operator's yes before downloading, then records every downloaded file in assets/LICENSES.md and checks a frame of each clip.",
+      "assertions": [
+        {"text": "Asks for approval with source, ID, licence and size before downloading", "type": "structural"},
+        {"text": "Writes a LICENSES.md row for every downloaded file", "type": "structural"}
+      ]
+    }
+  ]
+}

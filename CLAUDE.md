@@ -56,6 +56,18 @@ renders are gitignored. The 12 already-published projects are retained as teachi
 projects stay ignored. Do not treat existing public examples as permission to add
 new personal footage. Never print secrets or copy private media into library examples.
 
+## Brand profiles
+
+A brand profile is a folder: `DESIGN.md` (palette, type, captions, sound, voice
+rules), `tokens.css`, and an optional `logo.png` or `logo.svg`. Profiles live in
+`brands/<brand-slug>/`, or wherever `HERK_BRANDS` points, and are gitignored; only
+`brands/_template/` ships. Start a branded project with
+`npm run new-video -- <slug> --brand <brand-slug>`: the profile becomes the
+project's `DESIGN.md` and `assets/brand-tokens.css`, and `meta.json` records the
+brand. Where the project's `DESIGN.md` and the playbook disagree, `DESIGN.md` wins.
+Never mix two brands in one project, and never copy one brand's profile, logo, or
+footage into another brand's project.
+
 ## Editing and timing
 
 Before choosing a transcription, asset-generation, or voiceover service, read

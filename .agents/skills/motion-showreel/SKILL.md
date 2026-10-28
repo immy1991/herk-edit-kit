@@ -94,7 +94,7 @@ Read `docs/TOOLS-AND-API-KEYS.md` first. Music can be the user's own licensed tr
 or generated. Generation is a paid call, so confirm before running it:
 
 ```sh
-node .agents/skills/motion-showreel/scripts/kie.mjs music --title "Reel" --style "punchy electronic showreel, instrumental, 128 bpm, starts instantly, riser into a big drop" --out video-projects/my-reel/assets/audio
+node .agents/skills/motion-showreel/scripts/gen.mjs music --title "Reel" --style "punchy electronic showreel, instrumental, 128 bpm, starts instantly, riser into a big drop" --out video-projects/my-reel/assets/audio
 node .agents/skills/motion-showreel/scripts/music-grid.mjs video-projects/my-reel/assets/audio/take-0.mp3 --bpm 128 --beats
 ```
 
@@ -131,10 +131,13 @@ and -1.2 dBTP.
 
 ### 6. Assets
 
-- **Hero lookdev object.** Run `kie.mjs image --ref <logo.png>` (Seedream
-  image-to-image keeps the silhouette), then `kie.mjs video --image <still>` for a
+- **Hero lookdev object.** Run `gen.mjs image --ref <logo.png>` (Seedream
+  image-to-image keeps the silhouette), then `gen.mjs video --image <still>` for a
   5s Kling camera move. Both are paid calls. Kling returns 24fps: speed it up and
-  re-encode at 60fps all-intra (the command is in the header of `kie.mjs`).
+  re-encode at 60fps all-intra (the command is in the header of `fal.mjs` and `kie.mjs`).
+- **Provider.** `gen.mjs` runs fal.ai by default (`fal.mjs`) or Kie.ai (`kie.mjs`) with
+  `--provider kie` or `GEN_PROVIDER=kie`. `--dry-run` spends nothing: on fal it shows the
+  request, on Kie only the command. Name the provider used in every report.
 - **Fonts.** Download them into the project's `assets/fonts/` and use `@font-face`.
   Never rely on system fonts.
 

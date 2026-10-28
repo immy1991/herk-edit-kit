@@ -82,6 +82,30 @@ Copy either prompt:
 > first, then normalize the word timestamps for this kit. Keep transcription local
 > and use my supplied footage and assets without paid generation.
 
+## fal.ai or Kie.ai: choosing the provider
+
+`motion-showreel/scripts/gen.mjs` runs the same three showreel commands (music,
+image, video) on either provider. fal.ai is the default; choose Kie.ai per call with
+`--provider kie`, or for the whole workspace with `GEN_PROVIDER=kie` in `.env`.
+`--dry-run` spends nothing. On fal it prints the exact endpoint and input (images shown as
+placeholders, after checking the file exists and its type); on Kie it prints only the script and
+arguments it would run, because `kie.mjs` has no dry run. A missing, repeated or unknown provider
+stops the run before anything is spent.
+
+| Job | fal.ai (`fal.mjs`, needs `FAL_KEY`) | Kie.ai (`kie.mjs`, needs `KIE_API_KEY`) |
+|---|---|---|
+| Music | ElevenLabs Music v2.5, instrumental, one take | Suno V6, instrumental, every take the job returns |
+| Still from a logo | Seedream 5 Pro edit | Seedream 5 Pro image-to-image |
+| Camera move | Kling v3 Turbo Pro image-to-video | Kling v3 Turbo image-to-video |
+
+fal takes images as base64 data URIs, so there is no upload step; `fal.mjs` refuses images over
+10 MB (its own cap) and, for video, anything but PNG or JPEG. It checks the output path before
+paying: it never writes over an input, and won't replace an existing file without `--force`.
+Every job prints its request ID and a ready-to-run recovery command
+(`fal.mjs result --model <endpoint> --request <id> --out <file, or folder for music>`) that
+downloads a finished job without paying again. Balance lookup isn't implemented in this client:
+`fal.mjs credit` points to the usage dashboard (fal documents `GET /v1/account/billing?expand=credits`).
+
 ## Kie.ai: generated video and assets
 
 Nate uses [Kie.ai](https://kie.ai/) for generated video and image assets. Set

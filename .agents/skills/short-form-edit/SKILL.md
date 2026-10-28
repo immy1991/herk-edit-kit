@@ -63,8 +63,8 @@ the next edit starts from it. Record the note and the resulting rule together.
    captions, graphics, and sound from the same map.
 
 User authorization persists. An instruction to make a finished video and iterate
-authorizes ordinary local editing and rendering. An explicit request for Kie
-B-roll authorizes those generations. Resolve review gates through the current
+authorizes ordinary local editing and rendering. An explicit request for generated
+B-roll (fal.ai or Kie) authorizes those generations. Resolve review gates through the current
 authorization; ask only for missing approval, not again at every draft. Never post
 the reel or contact anyone without explicit authorization.
 
@@ -245,7 +245,8 @@ human reactions where they support the story.
 
 ## Generate and assemble
 
-1. Kie.ai is Nate's optional provider for generated moving inserts and images.
+1. fal.ai (the default here) or Kie.ai (Nate's choice) generates moving inserts and images,
+   through `.agents/skills/motion-showreel/scripts/gen.mjs` (`--provider fal|kie`).
    Use the student's chosen provider or supplied assets; check its account, credits,
    and integration before generating. See `docs/TOOLS-AND-API-KEYS.md`. Verify the
    current official API schema. Save model, prompt, task ID, selected output,

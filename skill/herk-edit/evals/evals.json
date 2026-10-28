@@ -54,7 +54,8 @@
       "expected_output": "Refuses to carry one brand's cards, logo or footage into another brand's project; offers to rebuild the same layout from the acme profile.",
       "assertions": [
         {"text": "Does not copy another brand's assets into this project", "type": "content"},
-        {"text": "Offers to rebuild the layout from this brand's profile", "type": "content"}
+        {"text": "Offers to rebuild the layout from this brand's profile", "type": "content"},
+        {"text": "Names the one-brand-per-project rule as the reason", "type": "content"}
       ]
     },
     {
@@ -63,7 +64,8 @@
       "expected_output": "Refuses to approximate or generate the logo; uses an exact supplied asset or an official media-kit file with the source URL saved, or falls back to plain brand-name text.",
       "assertions": [
         {"text": "Does not trace, approximate or generate the logo", "type": "content"},
-        {"text": "Uses a verified official asset with provenance saved, or plain text", "type": "content"}
+        {"text": "Uses a verified official asset with provenance saved, or plain text", "type": "content"},
+        {"text": "Saves the asset's source URL or supplied path as provenance before using it", "type": "structural"}
       ]
     },
     {
@@ -72,6 +74,7 @@
       "expected_output": "Reads the full transcript anyway, because a zero-candidate report has missed retakes before, and reports what it found before moving to the story plan.",
       "assertions": [
         {"text": "Performs the manual transcript read despite the zero-candidate report", "type": "structural"},
+        {"text": "Reports the result of that read before planning graphics", "type": "content"},
         {"text": "Does not start composition HTML before the transcript read is reported", "type": "structural"}
       ]
     },
@@ -81,7 +84,8 @@
       "expected_output": "Does not render the figure or the client name unless both are in the source and recorded as cleared; says which rule blocks it and offers an illustrative, clearly labelled mock instead.",
       "assertions": [
         {"text": "Blocks the client name and figure pending a clearance record", "type": "content"},
-        {"text": "Offers a labelled illustrative alternative", "type": "content"}
+        {"text": "Offers a labelled illustrative alternative", "type": "content"},
+        {"text": "Names the rule (in the source AND recorded as cleared) as the gate", "type": "content"}
       ]
     },
     {
@@ -89,6 +93,7 @@
       "prompt": "here's my 50 minute webinar recording, find the best 3 clips and dress them",
       "expected_output": "Says that mining a long recording is out of scope, asks for the chosen clips (or a clipping tool's output) first, then offers to dress each clip here.",
       "assertions": [
+        {"text": "States that mining a long recording is out of scope for this skill", "type": "content"},
         {"text": "Does not start mining or selecting moments in this skill", "type": "structural"},
         {"text": "Offers to dress each clip once the clips are chosen", "type": "content"}
       ]
@@ -119,7 +124,8 @@
       "expected_output": "Lists candidate clips with source, ID, licence and size and a total cap, waits for the operator's yes before downloading, then records every downloaded file in assets/LICENSES.md and checks a frame of each clip.",
       "assertions": [
         {"text": "Asks for approval with source, ID, licence and size before downloading", "type": "structural"},
-        {"text": "Writes a LICENSES.md row for every downloaded file", "type": "structural"}
+        {"text": "Writes a LICENSES.md row for every downloaded file", "type": "structural"},
+        {"text": "Checks a frame of each clip before using it", "type": "content"}
       ]
     }
   ]

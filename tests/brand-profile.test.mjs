@@ -36,6 +36,22 @@ test('without --brand the starter DESIGN.md is kept and no brand is recorded', (
   assert.equal(JSON.parse(readFileSync(join(dest, 'meta.json'))).brand, undefined);
 });
 
+test('--brand works before the slug and a relative HERK_BRANDS resolves from the kit root', (t) => {
+  const rel = `video-projects/zz-brands-${process.pid}`;
+  mkdirSync(join(root, rel, 'acme'), { recursive: true });
+  writeFileSync(join(root, rel, 'acme/DESIGN.md'), '# Acme\n');
+  const s = slug('order'); t.after(() => { cleanup(s); rmSync(join(root, rel), { recursive: true, force: true }); });
+  const r = spawnSync(process.execPath, [join(root, 'scripts/new-video.mjs'), '--brand', 'acme', s], { encoding: 'utf8', cwd: tmpdir(), env: { ...process.env, HERK_BRANDS: rel } });
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(JSON.parse(readFileSync(join(root, 'video-projects', s, 'meta.json'))).brand, 'acme');
+});
+
+test('a second slug or a repeated --brand is refused', () => {
+  assert.notEqual(newVideo([slug('a'), slug('b')]).status, 0);
+  assert.notEqual(newVideo([slug('c'), '--brand', 'x', '--brand', 'y']).status, 0);
+  assert.equal(existsSync(join(root, 'video-projects', slug('a'))), false);
+});
+
 test('a missing profile stops before any project is created', () => {
   const s = slug('missing');
   const r = newVideo([s, '--brand', 'nope'], { HERK_BRANDS: mkdtempSync(join(tmpdir(), 'herk-brands-')) });

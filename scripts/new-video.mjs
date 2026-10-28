@@ -3,18 +3,21 @@ import { cpSync, mkdirSync, existsSync, readFileSync, writeFileSync, copyFileSyn
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const slug = process.argv[2];
-const brandAt = process.argv.indexOf('--brand');
-const brand = brandAt > 2 ? process.argv[brandAt + 1] : undefined;
+const args = process.argv.slice(2);
+const brandAt = args.indexOf('--brand');
+const brand = brandAt >= 0 ? args[brandAt + 1] : undefined;
+const rest = args.filter((_, i) => brandAt < 0 || (i !== brandAt && i !== brandAt + 1));
+if (rest.length > 1 || args.filter(a => a === '--brand').length > 1) throw new Error('Usage: npm run new-video -- <lowercase-project-slug> [--brand <brand-slug>]');
+const slug = rest[0] === '--help' || args.includes('--help') ? '--help' : rest[0];
 if (!slug || slug === '--help') {
   console.log('Usage: npm run new-video -- <lowercase-project-slug> [--brand <brand-slug>]');
   process.exit(slug ? 0 : 1);
 }
 const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 if (!kebab.test(slug)) throw new Error('Use a lowercase kebab-case slug, not a path.');
-if (brandAt > 2 && !kebab.test(brand ?? '')) throw new Error('--brand needs a lowercase kebab-case brand slug.');
-// Profiles live in brands/<slug>/ unless HERK_BRANDS points somewhere else.
-const brandsDir = process.env.HERK_BRANDS ? resolve(process.env.HERK_BRANDS) : join(root, 'brands');
+if (brandAt >= 0 && !kebab.test(brand ?? '')) throw new Error('--brand needs a lowercase kebab-case brand slug.');
+// Profiles live in brands/<slug>/ unless HERK_BRANDS points somewhere else (relative paths resolve from the kit root).
+const brandsDir = resolve(root, process.env.HERK_BRANDS || 'brands');
 const brandDir = brand && join(brandsDir, brand);
 if (brandDir && !existsSync(join(brandDir, 'DESIGN.md'))) throw new Error(`No brand profile at ${brandDir}. Copy brands/_template there and fill it in.`);
 const dest = join(root, 'video-projects', slug);

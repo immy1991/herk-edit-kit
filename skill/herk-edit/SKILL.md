@@ -75,8 +75,8 @@ In explainer mode, before step 7, write `assets/number-sources.md` (every on-scr
 clearance for any client number). No source, no number on screen.
 
 1. **Probe and preserve.** `ffprobe` the source (duration, streams, resolution). Never edit the original.
-2. **Transcribe, word-level.** Local whisper.cpp through `npx hyperframes transcribe -e whisper -m large-v3`
-   by default (free, offline); ElevenLabs Scribe when speed or accuracy matters and `ELEVENLABS_API_KEY` is set
+2. **Transcribe, word-level.** Local whisper.cpp through
+   `npx hyperframes transcribe video-projects/<slug>/assets/raw.mp4 -e whisper -m large-v3 --dir video-projects/<slug>` by default (free, offline); ElevenLabs Scribe when speed or accuracy matters and `ELEVENLABS_API_KEY` is set
    in the kit `.env`. Say which one ran and why. Normalise to `{words:[{text,start,end}], audio_duration_secs}`. Reuse an
    existing verified transcript rather than paying twice. (kit: `docs/TOOLS-AND-API-KEYS.md`)
 3. **Cut silences first.** `cut-silences` writes the EDL and a retimed transcript. Keep natural beats after a
@@ -98,7 +98,8 @@ clearance for any client number). No source, no number on screen.
 8. **Mix.** Voice normalised; music and sound effects exactly as the profile says. No profile rule → no music, sound
    effects only on visible actions.
 9. **Preflight, lint, Studio.** `node scripts/preflight.mjs <project>`, `npx hyperframes lint`,
-   `validate-beat-sync.mjs` for anchored beats; for reels also `validate:short-form` and `validate:footage`.
+   `validate-beat-sync.mjs` for anchored beats; for reels also `npm run validate:short-form -- video-projects/<slug>` and
+   `npm run validate:footage -- video-projects/<slug>`.
 10. **Draft render and inspect.** `npx hyperframes render --quality draft`. Pull frame strips 10 frames each side of
     every cut, the first 2.5 s frame by frame, hero frames at full size and phone size. Listen at every join.
     Re-transcribe the final audio and compare words at every cut. Measure LUFS and true peak on the encoded stereo file.

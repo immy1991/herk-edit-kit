@@ -10,10 +10,10 @@
 >   `--provider kie`. See the [tools guide](docs/TOOLS-AND-API-KEYS.md).
 > - **The `herk-edit` skill** in [`skill/herk-edit/`](skill/herk-edit/). It runs a full edit of one
 >   clip in your brand from any folder. Install it with
->   `cp -R skill/herk-edit ~/.claude/skills/` (Claude Code) or `~/.agents/skills/` (Codex), then
->   follow [`skill/herk-edit/references/setup.md`](skill/herk-edit/references/setup.md).
+>   `cp -R skill/herk-edit ~/.claude/skills/` (Claude Code) or `cp -R skill/herk-edit ~/.agents/skills/`
+>   (Codex), then follow [`skill/herk-edit/references/setup.md`](skill/herk-edit/references/setup.md).
 >
-> To use this fork, clone `https://github.com/immy1991/herk-edit-kit.git` in the install steps below.
+> The install steps below clone this fork. Nate's original lives at `https://github.com/nateherkai/herk-edit-kit`.
 
 Nate Herk's video-editing kit for **Codex and Claude Code**, built on HyperFrames.
 Formerly the HyperFrames Student Kit.
@@ -83,7 +83,7 @@ Chromium. Make `node`, `ffmpeg`, and `ffprobe` available in your terminal.
 Then run these commands in PowerShell, macOS Terminal, or a Linux shell:
 
 ```sh
-git clone https://github.com/nateherkai/herk-edit-kit.git
+git clone https://github.com/immy1991/herk-edit-kit.git
 cd herk-edit-kit
 npm ci
 npm run setup
